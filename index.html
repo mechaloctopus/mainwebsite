@@ -98,6 +98,16 @@
       margin-left: 10px;
     }
     
+    /* Hamburger Menu Styling for desktop (hidden by default) */
+    nav .hamburger {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    
     /* Main container – add top padding to allow for the fixed navbar */
     main {
       padding-top: var(--nav-height);
@@ -118,7 +128,7 @@
       background-size: contain; /* Ensure whole square image is visible */
       color: #fff;
       text-align: center;
-      min-height: 60vh;
+      min-height: 80vh; /* Increased height for larger display */
       display: flex;
       flex-direction: column;
       justify-content: center;
