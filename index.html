@@ -128,7 +128,7 @@
       background-size: contain; /* Ensure whole square image is visible */
       color: #fff;
       text-align: center;
-      min-height: 80vh; /* Increased height for larger display */
+      min-height: 100vh; /* Increased height for larger display */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -283,7 +283,7 @@
         margin-top: 10px;
       }
       #home-section {
-        min-height: 40vh;
+        min-height: 100vh;
       }
       .team-member-card {
         width: 100px;
@@ -431,11 +431,24 @@
       } else {
         navLinks.classList.add("active");
       }
+      // Update main padding after nav toggle in mobile view
+      updateMainPadding();
     }
+
+    // Adjusts main padding to match the current navbar height.
+    function updateMainPadding() {
+      var nav = document.querySelector("nav");
+      var main = document.querySelector("main");
+      main.style.paddingTop = nav.offsetHeight + "px";
+    }
+
+    // Update main padding on window resize
+    window.addEventListener("resize", updateMainPadding);
 
     // Set default section on load (Home)
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
+      updateMainPadding();
     });
   </script>
 </body>
