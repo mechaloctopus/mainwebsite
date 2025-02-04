@@ -104,8 +104,8 @@
     }
     
     /* General Section Styling */
-    main > section {
-      display: none;
+    main > section:not(.active) {
+      display: none !important;
     }
     main > section.active {
       display: block;
@@ -380,11 +380,17 @@
 
   <script>
     function showSection(section) {
-      // Hide all main sections
-      document.querySelectorAll("main > section").forEach(sec => sec.classList.remove("active"));
-      // Show the selected section
-      document.getElementById(section + "-section").classList.add("active");
-      // Scroll to the top after section change
+      // Hide all main sections using a for loop
+      var sections = document.querySelectorAll("main > section");
+      for (var i = 0; i < sections.length; i++) {
+          sections[i].classList.remove("active");
+      }
+      // Show the selected section if it exists
+      var target = document.getElementById(section + "-section");
+      if(target) {
+          target.classList.add("active");
+      }
+      // Scroll to top after section change
       window.scrollTo(0, 0);
     }
 
