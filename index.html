@@ -540,8 +540,8 @@
       var maxScrollBG = 4000;   // Extended scroll range for background zoom
       var maxScrollText = 2000; // Extended scroll range for hero text transformation
 
-      // Background: Scale from 1 up to 1.5x for a gentle zoom-in effect.
-      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 0.5;
+      // Background: Scale from 1 up to 4x for a much faster zoom-in effect (6x faster than before).
+      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 3;
       var bgContainer = document.querySelector('#home-section .bg-container');
       if (bgContainer) {
           bgContainer.style.transform = 'scale(' + bgScale + ')';
