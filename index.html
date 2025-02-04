@@ -111,10 +111,11 @@
       display: block;
     }
     
-    /* Home Section – Reduced Hero */
+    /* Home Section – Updated Landing Page */
     #home-section {
       position: relative; /* Added for the overlay */
-      background: url('farmhouse.jpg') no-repeat center center/cover;
+      background: url('farmhouse.jpg') no-repeat center center;
+      background-size: contain; /* Ensure whole square image is visible */
       color: #fff;
       text-align: center;
       min-height: 60vh;
@@ -250,7 +251,25 @@
         height: auto;
         padding: 10px;
       }
-      nav .nav-links, nav .extra-links {
+      /* Show hamburger button on mobile */
+      nav .hamburger {
+        display: block;
+        margin: 10px 0;
+      }
+      /* Hide nav-links by default; show when active */
+      nav .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+      }
+      nav .nav-links.active {
+        display: flex;
+      }
+      nav .nav-links li {
+        margin: 10px 0;
+      }
+      nav .extra-links {
         margin-top: 10px;
       }
       #home-section {
@@ -263,6 +282,16 @@
         width: 140px;
       }
     }
+
+    /* Hamburger Menu Styling */
+    nav .hamburger {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -272,6 +301,7 @@
       <img src="icon.jpg" alt="Farmhouse Mushroom Company Logo">
       <span>Farmhouse Mushroom Company</span>
     </div>
+    <button class="hamburger" onclick="toggleNav()">&#9776;</button>
     <ul class="nav-links">
       <li><a href="#" onclick="showSection('home'); return false;">Home</a></li>
       <li><a href="#" onclick="showSection('mushrooms'); return false;">Mushrooms</a></li>
@@ -392,6 +422,15 @@
       }
       // Scroll to top after section change
       window.scrollTo(0, 0);
+    }
+
+    function toggleNav() {
+      var navLinks = document.querySelector("nav .nav-links");
+      if(navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+      } else {
+        navLinks.classList.add("active");
+      }
     }
 
     // Set default section on load (Home)
