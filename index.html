@@ -542,9 +542,13 @@
 
       // Background: Scale from 1 up to 4x for a much faster zoom-in effect (6x faster than before).
       var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 3;
+      // Calculate vertical translation so the image shifts down as it zooms.
+      // Here, maxTranslateY is set to 20% of the viewport height.
+      var maxTranslateY = window.innerHeight * 0.2;
+      var bgTranslateY = (Math.min(scrollY, maxScrollBG) / maxScrollBG) * maxTranslateY;
       var bgContainer = document.querySelector('#home-section .bg-container');
       if (bgContainer) {
-          bgContainer.style.transform = 'scale(' + bgScale + ')';
+          bgContainer.style.transform = 'translateY(' + bgTranslateY + 'px) scale(' + bgScale + ')';
       }
 
       // Hero content: Start larger (scale 2.0) and scale down gradually to scale 1.0
