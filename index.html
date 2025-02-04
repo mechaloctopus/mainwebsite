@@ -5,7 +5,12 @@
   <title>Farmhouse Mushroom Company</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Basic resets and typography */
+    /* CSS Variables */
+    :root {
+      --nav-height: 70px;
+    }
+    
+    /* Reset and Base Styles */
     * {
       margin: 0;
       padding: 0;
@@ -17,17 +22,19 @@
       color: #3b3b3b;
       line-height: 1.6;
     }
-    /* Navbar styling */
+    
+    /* Navbar Styling */
     nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: var(--nav-height);
       background-color: #6d4c41;
       color: #fff;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
       z-index: 1000;
     }
     nav .logo {
@@ -39,16 +46,16 @@
       margin-right: 10px;
     }
     nav .logo span {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
     }
     nav .nav-links {
       list-style: none;
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
     }
     nav .nav-links li {
-      margin: 0 10px;
+      margin: 0 8px;
     }
     nav .nav-links li a {
       color: #fff;
@@ -60,7 +67,7 @@
     }
     nav .nav-links li a:hover {
       background: rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
+      border-radius: 4px;
     }
     nav .extra-links {
       display: flex;
@@ -73,7 +80,7 @@
       font-size: 16px;
       padding: 5px 10px;
       background: #8d6e63;
-      border-radius: 5px;
+      border-radius: 4px;
       transition: background 0.3s;
     }
     nav .extra-links a:hover {
@@ -84,66 +91,70 @@
       width: 24px;
       margin-left: 10px;
     }
-    /* Main content styles and sections */
+    
+    /* Main container – add top padding to allow for the fixed navbar */
     main {
-      padding: 20px;
+      padding-top: var(--nav-height);
     }
-    main section {
+    
+    /* General Section Styling */
+    main > section {
       display: none;
-      min-height: calc(100vh - 70px);
-      padding: 20px;
     }
-    main section.active {
+    main > section.active {
       display: block;
     }
-    /* Home Section (Hero Banner) */
+    
+    /* Home Section – Reduced Hero */
     #home-section {
       background: url('farmhouse.jpg') no-repeat center center/cover;
-      position: relative;
       color: #fff;
       text-align: center;
+      min-height: 60vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    }
-    #home-section .hero-content {
-      background: rgba(0,0,0,0.5);
       padding: 20px;
-      border-radius: 10px;
     }
-    #home-section h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+    #home-section .hero-content h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
     }
-    #home-section p {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-    #home-section button {
-      padding: 10px 20px;
+    #home-section .hero-content p {
       font-size: 18px;
+      margin-bottom: 15px;
+    }
+    #home-section .hero-content button {
+      padding: 8px 16px;
+      font-size: 16px;
       background: #8d6e63;
       color: #fff;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
       transition: background 0.3s;
     }
-    #home-section button:hover {
+    #home-section .hero-content button:hover {
       background: #a1887f;
     }
-    /* Mushrooms and Price Sheet Sections */
-    #mushrooms-section iframe,
-    #price-section iframe {
+    
+    /* Iframe Sections (Mushrooms & Price Sheet) */
+    .iframe-section {
+      height: calc(100vh - var(--nav-height));
+      overflow: hidden;
+    }
+    .iframe-section iframe {
       width: 100%;
-      height: 80vh;
+      height: 100%;
       border: none;
     }
+    
     /* About Us Section */
     #about-section {
       max-width: 1000px;
-      margin: auto;
+      margin: 40px auto;
+      padding: 20px;
       text-align: center;
     }
     #about-section h2,
@@ -152,6 +163,8 @@
     }
     #about-section p {
       margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
     }
     .team-members {
       display: flex;
@@ -165,7 +178,7 @@
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      width: 150px;
+      width: 120px;
       text-align: center;
     }
     .team-member-card img {
@@ -173,10 +186,12 @@
       border-radius: 50%;
       margin-bottom: 10px;
     }
+    
     /* Products Section */
     #products-section {
       max-width: 800px;
-      margin: auto;
+      margin: 40px auto;
+      padding: 20px;
       text-align: center;
     }
     #products-section h2 {
@@ -205,27 +220,25 @@
       color: #3b3b3b;
       font-weight: bold;
     }
-    /* Responsive Navigation for Mobile */
+    
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
-        align-items: flex-start;
+        height: auto;
+        padding: 10px;
       }
-      nav .nav-links,
-      nav .extra-links {
+      nav .nav-links, nav .extra-links {
         margin-top: 10px;
       }
-      #home-section h1 {
-        font-size: 36px;
-      }
-      #home-section p {
-        font-size: 18px;
+      #home-section {
+        min-height: 40vh;
       }
       .team-member-card {
-        width: 120px;
+        width: 100px;
       }
       .product-category {
-        width: 150px;
+        width: 140px;
       }
     }
   </style>
@@ -233,7 +246,7 @@
 <body>
   <nav>
     <div class="logo">
-      <!-- Replace logo.png with your logo file -->
+      <!-- Replace with your actual logo -->
       <img src="logo.png" alt="Farmhouse Mushroom Company Logo">
       <span>Farmhouse Mushroom Company</span>
     </div>
@@ -245,9 +258,9 @@
       <li><a onclick="showSection('products')">Products</a></li>
     </ul>
     <div class="extra-links">
-      <!-- Replace the Etsy href below with your Etsy store URL -->
+      <!-- Replace with your Etsy store URL -->
       <a href="https://www.etsy.com/yourshop" target="_blank">Etsy Store</a>
-      <!-- Replace the src attributes with your Instagram and Facebook icon image paths -->
+      <!-- Replace with your social icons -->
       <a href="https://www.instagram.com/yourprofile" target="_blank">
         <img src="instagram.svg" alt="Instagram">
       </a>
@@ -258,33 +271,32 @@
   </nav>
 
   <main>
-    <!-- Home Section -->
+    <!-- Home Section – Subtle Landing Instead of Overwhelming Hero -->
     <section id="home-section" class="active">
       <div class="hero-content">
-        <h1>Welcome to Farmhouse Mushroom Company</h1>
-        <p>Experience the rustic charm and natural bounty of handcrafted, sustainable mushrooms.</p>
-        <button onclick="showSection('mushrooms')">Explore Mushrooms</button>
+        <h1>Farmhouse Mushroom Company</h1>
+        <p>Rustic charm & sustainable mushrooms.</p>
+        <button onclick="showSection('mushrooms')">View Mushrooms</button>
       </div>
     </section>
 
-    <!-- Mushrooms Section with iframe -->
-    <section id="mushrooms-section">
-      <!-- Replace the src with the URL of your mushroom cards webpage -->
-      <iframe src="https://mechaloctopus.github.io/farmhousemushrooms/"></iframe>
+    <!-- Mushrooms Section – Iframe Takes Full Available Space -->
+    <section id="mushrooms-section" class="iframe-section">
+      <!-- Replace the src with your mushroom page URL -->
+      <iframe src="https://yourmushroomcardspage.com"></iframe>
     </section>
     
-    <!-- Price Sheet Section with iframe -->
-    <section id="price-section">
-      <h2>Mushroom Price Sheet</h2>
-      <!-- Replace the src with the URL of your price sheet webpage or keep as a placeholder -->
+    <!-- Price Sheet Section – Iframe Takes Full Available Space -->
+    <section id="price-section" class="iframe-section">
+      <!-- Replace the src with your price sheet URL -->
       <iframe src="https://yourmushroompricesheet.com"></iframe>
     </section>
 
     <!-- About Us Section -->
     <section id="about-section">
       <h2>About Us</h2>
-      <p>Welcome to Farmhouse Mushroom Company, nestled in Bokchito, Oklahoma. Our journey began with a deep connection to nature and a passion for mushrooms. Josh—who has over 10 years of hands-on experience—has mastered the art of tuning into each mushroom's spirit to cultivate pristine fungi. Our commitment to quality, community, and sustainability fuels our every harvest.</p>
-      <p>From rustic beginnings to modern practices, we proudly celebrate the profound health benefits and culinary delights of mushrooms.</p>
+      <p>Located in Bokchito, Oklahoma, Farmhouse Mushroom Company began with a deep connection to nature and a passion for mushrooms. Josh, with over 10 years of experience, tunes into the spirit of every mushroom to cultivate pristine fungi. Recognizing the profound health benefits and culinary delights of mushrooms, we embraced sustainable farmhouse practices to grow an array of culinary mushrooms.</p>
+      <p>Our commitment to quality, community, and sustainability shines through every harvest. We invite you to explore our story and meet the team that makes it all possible.</p>
       <h3>Our Team</h3>
       <div class="team-members">
         <div class="team-member-card">
@@ -321,13 +333,13 @@
         </div>
       </div>
       <h3>Contact Us</h3>
-      <p>Have questions or special requests? Reach out at <a href="mailto:farmhousemushroom@gmail.com">farmhousemushroom@gmail.com</a></p>
+      <p>For inquiries or special requests, email us at <a href="mailto:farmhousemushroom@gmail.com">farmhousemushroom@gmail.com</a>.</p>
     </section>
 
     <!-- Products Section -->
     <section id="products-section">
       <h2>Products</h2>
-      <p>Explore our curated Mushroom Products from our Etsy store:</p>
+      <p>Explore our curated mushroom products from our Etsy store:</p>
       <div class="product-categories">
         <div class="product-category">
           <a href="https://www.etsy.com/yourshop/liquid-cultures" target="_blank">Liquid Cultures</a>
@@ -347,19 +359,17 @@
 
   <script>
     function showSection(section) {
-      // Hide all sections
-      var sections = document.querySelectorAll("main section");
-      sections.forEach(function(sec) {
-        sec.classList.remove("active");
-      });
+      // Hide all main sections
+      document.querySelectorAll("main > section").forEach(sec => sec.classList.remove("active"));
       // Show the selected section
       document.getElementById(section + "-section").classList.add("active");
-      // Scroll to the top of the page when a section is shown
-      window.scrollTo(0,0);
+      // Scroll to the top after section change
+      window.scrollTo(0, 0);
     }
-    // Set default active section when the DOM loads
+
+    // Set default section on load (Home)
     document.addEventListener("DOMContentLoaded", function() {
-      showSection("home");
+      showSection('home');
     });
   </script>
 </body>
