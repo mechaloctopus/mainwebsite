@@ -35,13 +35,14 @@
       top: 0;
       width: 100%;
       height: var(--nav-height);
-      background-color: #6d4c41;
+      background: linear-gradient(45deg, #6d4c41, #8d6e63);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
     nav .logo {
       display: flex;
@@ -70,10 +71,21 @@
       padding: 5px 10px;
       transition: background 0.3s;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
-    nav .nav-links li a:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
+    nav .nav-links li a::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    nav .nav-links li a:hover::after {
+      left: 100%;
     }
     nav .extra-links {
       display: flex;
@@ -121,11 +133,10 @@
       display: block;
     }
     
-    /* Home Section – Updated Landing Page */
+    /* Home Section – Updated Landing Page with Parallax */
     #home-section {
-      position: relative; /* Added for the overlay */
-      background: url('farmhouse.jpg') no-repeat center center;
-      background-size: contain; /* Ensure whole square image is visible */
+      position: relative; /* For containing absolute positioned .bg-container */
+      background: none; /* Background is now handled by .bg-container */
       color: #fff;
       text-align: center;
       min-height: 100vh; /* Increased height for larger display */
@@ -134,6 +145,7 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      overflow: hidden; /* Hide any overflow during transforms */
     }
     /* Added dark overlay for better text contrast */
     #home-section::before {
@@ -159,17 +171,34 @@
       margin-bottom: 15px;
     }
     #home-section .hero-content button {
-      padding: 8px 16px;
+      padding: 10px 20px;
       font-size: 16px;
       background: #8d6e63;
       color: #fff;
       border: none;
-      border-radius: 4px;
+      border-radius: 20px;
       cursor: pointer;
-      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s, transform 0.3s;
     }
     #home-section .hero-content button:hover {
       background: #a1887f;
+      transform: scale(1.02);
+    }
+    /* Shimmer effect */
+    #home-section .hero-content button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
+      transition: left 0.5s;
+    }
+    #home-section .hero-content button:hover::after {
+      left: 100%;
     }
     
     /* Iframe Sections (Mushrooms & Price Sheet) */
@@ -213,6 +242,11 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       width: 120px;
       text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .team-member-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     .team-member-card img {
       width: 100%;
@@ -241,12 +275,13 @@
       background: #fff;
       padding: 20px;
       width: 180px;
-      border-radius: 10px;
+      border-radius: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
     .product-category:hover {
       transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .product-category a {
       text-decoration: none;
@@ -292,6 +327,19 @@
         width: 140px;
       }
     }
+
+    /* Background container for parallax effect */
+    #home-section .bg-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('farmhouse.jpg') no-repeat center center;
+      background-size: contain;
+      z-index: 0;
+      transition: transform 0.3s ease-out;
+    }
   </style>
 </head>
 <body>
@@ -323,8 +371,9 @@
   </nav>
 
   <main>
-    <!-- Home Section – Updated Landing Page -->
+    <!-- Home Section – Updated Landing Page with Parallax -->
     <section id="home-section" class="active">
+      <div class="bg-container"></div>
       <div class="hero-content">
         <h1>Welcome to Farmhouse Mushroom Company</h1>
         <p>We love mushrooms.</p>
@@ -444,6 +493,32 @@
 
     // Update main padding on window resize
     window.addEventListener("resize", updateMainPadding);
+
+    // Parallax scroll effect for the home section
+    window.addEventListener("scroll", parallaxEffect);
+
+    function parallaxEffect() {
+      var scrollY = window.pageYOffset;
+      var maxScroll = 300; // Maximum scroll value for effect adjustments
+
+      // Calculate scale for the background image (1 to 1.1)
+      var bgScale = 1 + (Math.min(scrollY, maxScroll) / maxScroll) * 0.1;
+      var bgContainer = document.querySelector('#home-section .bg-container');
+      if(bgContainer) {
+          bgContainer.style.transform = 'scale(' + bgScale + ')';
+      }
+
+      // Calculate transformation for the hero content:
+      // Scale down from 1 to 0.9, translate upward, and decrease opacity.
+      var textScale = 1 - (Math.min(scrollY, maxScroll) / maxScroll) * 0.1;
+      var translateY = -(Math.min(scrollY, maxScroll) / 2); // move upward as you scroll
+      var textOpacity = 1 - (Math.min(scrollY, maxScroll) / maxScroll);
+      var heroContent = document.querySelector('#home-section .hero-content');
+      if(heroContent) {
+          heroContent.style.transform = 'scale(' + textScale + ') translateY(' + translateY + 'px)';
+          heroContent.style.opacity = textOpacity;
+      }
+    }
 
     // Set default section on load (Home)
     document.addEventListener("DOMContentLoaded", function() {
