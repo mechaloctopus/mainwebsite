@@ -366,9 +366,10 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100vh;  /* Updated: now fixed to viewport height */
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('farmhouse.jpg') no-repeat center center;
-      background-size: cover; /* Ensures full-screen coverage */
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('farmhouse.jpg') no-repeat center bottom;
+      background-size: contain;
+      transform-origin: center bottom;
       z-index: 0;
       transition: transform 0.3s ease-out;
     }
@@ -539,23 +540,20 @@
       var maxScrollBG = 4000;   // Extended scroll range for background zoom
       var maxScrollText = 2000; // Extended scroll range for hero text transformation
 
-      // Calculate scale for the background image - scale from 1 up to 10x.
-      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 9;
+      // Background: Scale from 1 up to 1.5x for a gentle zoom-in effect.
+      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 0.5;
       var bgContainer = document.querySelector('#home-section .bg-container');
       if (bgContainer) {
           bgContainer.style.transform = 'scale(' + bgScale + ')';
       }
 
-      // Calculate transformation for the hero content:
+      // Hero content: Start larger (scale 2.0) and scale down gradually to scale 1.0
       var progress = Math.min(scrollY, maxScrollText) / maxScrollText;
-      var textScale = 1 - 0.8 * progress;
-      var translateY = -(600 * progress);
-      var rotateDeg = 20 * progress;
-      var textOpacity = 1 - progress;
+      var textScale = 2.0 - 1.0 * progress;
       var heroContent = document.querySelector('#home-section .hero-content');
       if (heroContent) {
-          heroContent.style.transform = 'translate(-50%, -50%) scale(' + textScale + ') translateY(' + translateY + 'px) rotate(' + rotateDeg + 'deg)';
-          heroContent.style.opacity = textOpacity;
+          heroContent.style.transform = 'translate(-50%, -50%) scale(' + textScale + ')';
+          heroContent.style.opacity = 1;
       }
     }
 
@@ -563,6 +561,7 @@
     document.addEventListener("DOMContentLoaded", function() {
       showSection('home');
       updateMainPadding();
+      parallaxEffect();
     });
   </script>
 </body>
