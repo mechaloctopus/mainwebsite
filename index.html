@@ -164,7 +164,7 @@
       background: none; /* Background is now handled by .bg-container */
       color: #fff;
       text-align: center;
-      min-height: 100vh; /* Increased height for larger display */
+      min-height: 500vh; /* Updated height for extended parallax scrolling */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -366,7 +366,7 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('farmhouse.jpg') no-repeat center center;
-      background-size: contain;
+      background-size: cover; /* Changed from 'contain' to 'cover' for a full-screen parallax zoom effect */
       z-index: 0;
       transition: transform 0.3s ease-out;
     }
@@ -534,25 +534,24 @@
 
     function parallaxEffect() {
       var scrollY = window.pageYOffset;
-      var maxScrollBG = 3000;   // Extended scroll range for background zoom (3000px)
-      var maxScrollText = 1200; // Scroll range for hero text transformation
-  
-      // Calculate scale for the background image - scale from 1 up to 5x.
-      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 4;
+      var maxScrollBG = 4000;   // Extended scroll range for background zoom
+      var maxScrollText = 2000; // Extended scroll range for hero text transformation
+
+      // Calculate scale for the background image - scale from 1 up to 10x.
+      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 9;
       var bgContainer = document.querySelector('#home-section .bg-container');
-      if(bgContainer) {
+      if (bgContainer) {
           bgContainer.style.transform = 'scale(' + bgScale + ')';
       }
-  
+
       // Calculate transformation for the hero content:
-      // Scale down up to 50%, translate upward up to 200px, rotate up to 10°, and fade out completely.
       var progress = Math.min(scrollY, maxScrollText) / maxScrollText;
-      var textScale = 1 - progress * 0.5;
-      var translateY = -(progress * 200);
-      var rotateDeg = progress * 10;
+      var textScale = 1 - 0.8 * progress;
+      var translateY = -(600 * progress);
+      var rotateDeg = 20 * progress;
       var textOpacity = 1 - progress;
       var heroContent = document.querySelector('#home-section .hero-content');
-      if(heroContent) {
+      if (heroContent) {
           heroContent.style.transform = 'scale(' + textScale + ') translateY(' + translateY + 'px) rotate(' + rotateDeg + 'deg)';
           heroContent.style.opacity = textOpacity;
       }
