@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Farmhouse Mushroom Company</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Added Google Fonts for improved typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* CSS Variables */
     :root {
@@ -17,10 +19,14 @@
       box-sizing: border-box;
     }
     body {
-      font-family: Georgia, "Times New Roman", Times, serif;
+      font-family: 'Montserrat', Arial, sans-serif; /* Updated to a modern sans-serif */
       background: #f8f4e3;
       color: #3b3b3b;
       line-height: 1.6;
+    }
+    /* Improved typography for headings */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
     }
     
     /* Navbar Styling */
@@ -107,6 +113,7 @@
     
     /* Home Section – Reduced Hero */
     #home-section {
+      position: relative; /* Added for the overlay */
       background: url('farmhouse.jpg') no-repeat center center/cover;
       color: #fff;
       text-align: center;
@@ -116,6 +123,21 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+    }
+    /* Added dark overlay for better text contrast */
+    #home-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    #home-section .hero-content {
+      position: relative;
+      z-index: 1;
     }
     #home-section .hero-content h1 {
       font-size: 32px;
@@ -271,19 +293,18 @@
   </nav>
 
   <main>
-    <!-- Home Section – Subtle Landing Instead of Overwhelming Hero -->
+    <!-- Home Section – Updated Landing Page -->
     <section id="home-section" class="active">
       <div class="hero-content">
-        <h1>Farmhouse Mushroom Company</h1>
-        <p>Rustic charm & sustainable mushrooms.</p>
-        <button onclick="showSection('mushrooms')">View Mushrooms</button>
+        <h1>Welcome to Farmhouse Mushroom Company</h1>
+        <p>We love mushrooms.</p>
       </div>
     </section>
 
-    <!-- Mushrooms Section – Iframe Takes Full Available Space -->
+    <!-- Mushrooms Section – Iframe Taking Full Available Space -->
     <section id="mushrooms-section" class="iframe-section">
-      <!-- Replace the src with your mushroom page URL -->
-      <iframe src="https://yourmushroomcardspage.com"></iframe>
+      <!-- Updated iframe src for the mushroom card page -->
+      <iframe src="https://mechaloctopus.github.io/farmhousemushrooms/"></iframe>
     </section>
     
     <!-- Price Sheet Section – Iframe Takes Full Available Space -->
