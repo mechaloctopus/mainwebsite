@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Farmhouse Mushroom Company</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Basic resets and typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: #f8f4e3;
+      color: #3b3b3b;
+      line-height: 1.6;
+    }
+    /* Navbar styling */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #6d4c41;
+      color: #fff;
+      padding: 10px 20px;
+    }
+    nav .logo {
+      display: flex;
+      align-items: center;
+    }
+    nav .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    nav .logo span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    nav .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    nav .nav-links li {
+      margin: 0 10px;
+    }
+    nav .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      transition: background 0.3s;
+    }
+    nav .nav-links li a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+    }
+    nav .extra-links {
+      display: flex;
+      align-items: center;
+    }
+    nav .extra-links a {
+      margin-left: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px 10px;
+      background: #8d6e63;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    nav .extra-links a:hover {
+      background: #a1887f;
+    }
+    nav .extra-links img {
+      height: 24px;
+      width: 24px;
+      margin-left: 10px;
+    }
+    /* Main content styles and sections */
+    main {
+      padding: 20px;
+    }
+    main section {
+      display: none;
+      /* Make sure the section always fills the available space */
+      min-height: calc(100vh - 70px); /* Adjust based on your nav height if needed */
+    }
+    main section.active {
+      display: block;
+    }
+    /* Mushrooms section: iframe takes full width/height */
+    #mushrooms-section iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* About Us section styling */
+    #about-section h2 {
+      margin-bottom: 15px;
+    }
+    #about-section p {
+      margin-bottom: 10px;
+    }
+    /* Responsive Navigation for Mobile */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav .nav-links,
+      nav .extra-links {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <!-- Replace logo.png with your logo file -->
+      <img src="logo.png" alt="Farmhouse Mushroom Company Logo">
+      <span>Farmhouse Mushroom Company</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showSection('mushrooms')">Mushrooms</a></li>
+      <li><a href="#" onclick="showSection('about')">About Us</a></li>
+    </ul>
+    <div class="extra-links">
+      <!-- Replace the Etsy href below with your Etsy store URL -->
+      <a href="https://www.etsy.com/yourshop" target="_blank">Etsy Store</a>
+      <!-- Replace the src attributes with your Instagram and Facebook icon image paths -->
+      <a href="https://www.instagram.com/yourprofile" target="_blank">
+        <img src="instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://www.facebook.com/yourprofile" target="_blank">
+        <img src="facebook.svg" alt="Facebook">
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Mushrooms Section with iframe for your hosted mushroom card page -->
+    <section id="mushrooms-section" class="active">
+      <!-- Replace the src with the URL of your mushroom cards webpage -->
+      <iframe src="https://yourmushroomcardspage.com"></iframe>
+    </section>
+    
+    <!-- About Us Section -->
+    <section id="about-section">
+      <h2>About Us</h2>
+      <p>Welcome to Farmhouse Mushroom Company. Nestled amid rolling farmlands and rustic charm, we bring you the finest mushrooms grown with tradition and care. Our heritage is rooted in sustainable, farmhouse practices combined with a love for nature.</p>
+      <p>Every mushroom has a story, and every harvest celebrates our commitment to quality and community. Join us in our journey from our humble farmhouse to your table.</p>
+    </section>
+  </main>
+
+  <script>
+    function showSection(section) {
+      // Hide all sections
+      var sections = document.querySelectorAll("main section");
+      sections.forEach(function(sec) {
+        sec.classList.remove("active");
+      });
+      // Show the selected section
+      document.getElementById(section + "-section").classList.add("active");
+    }
+
+    // Set default active section when DOM loads
+    document.addEventListener("DOMContentLoaded", function() {
+      showSection("mushrooms");
+    });
+  </script>
+</body>
+</html> 
