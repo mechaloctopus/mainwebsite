@@ -537,8 +537,11 @@
       var maxScrollBG = 4000;   // Extended scroll range for background zoom
       var maxScrollText = 2000; // Extended scroll range for hero text transformation
 
-      // Background: Scale from 1 up to 4x for a much faster zoom-in effect (6x faster than before).
-      var bgScale = 1 + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * 3;
+      // Background: Start at a smaller scale (0.5) and zoom in up to 4x for a drastic parallax effect.
+      var initialBgScale = 0.5;
+      var finalBgScale = 4;
+      var bgScale = initialBgScale + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * (finalBgScale - initialBgScale);
+      
       // Calculate vertical translation so the image shifts down as it zooms.
       // Here, maxTranslateY is set to 20% of the viewport height.
       var maxTranslateY = window.innerHeight * 0.2;
@@ -547,7 +550,7 @@
       if (bgContainer) {
           bgContainer.style.transform = 'translateY(' + bgTranslateY + 'px) scale(' + bgScale + ')';
       }
-
+      
       // Hero content: Start larger (scale 2.0) and scale down gradually to scale 1.0
       var progress = Math.min(scrollY, maxScrollText) / maxScrollText;
       var textScale = 2.0 - 1.0 * progress;
