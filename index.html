@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Farmhouse Mushroom Company</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Farmhouse Mushroom Company: Quality mushrooms cultivated with sustainable, farmhouse-inspired methods.">
   <!-- Added Google Fonts for improved typography -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -15,6 +16,7 @@
     /* CSS Variables */
     :root {
       --nav-height: 70px;
+      --golden-ratio: 1.618;
     }
     
     /* Reset and Base Styles */
@@ -67,67 +69,45 @@
       align-items: center;
     }
     nav .nav-links li {
-      margin: 0 8px;
+      margin: 0 16px;
     }
     nav .nav-links li a {
       color: #fff;
       text-decoration: none;
       font-size: 16px;
-      padding: 5px 10px;
-      /* Use all properties (transform & color) to animate smoothly */
-      transition: transform 0.3s ease, color 0.3s ease;
+      padding: 8px 16px;
+      transition: color 0.3s ease;
       cursor: pointer;
       position: relative;
-      overflow: hidden;
     }
-    /* On hover, scale up the link slightly */
-    nav .nav-links li a:hover {
-      transform: scale(1.05);
-    }
-    /* Pseudo-element for a shimmer effect */
     nav .nav-links li a::after {
       content: "";
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-      pointer-events: none;
+      left: 0;
+      bottom: -3px;
+      width: 0;
+      height: 2px;
+      background: #ffd700;
+      transition: width 0.3s ease;
     }
-    /* Instead of a transition, use a keyframes animation for shimmer */
     nav .nav-links li a:hover::after {
-      animation: shimmer 0.6s forwards;
+      width: 100%;
     }
-    @keyframes shimmer {
-      from { left: -100%; }
-      to { left: 100%; }
+    nav .nav-links li a:hover {
+      color: #ffd700;
     }
-    nav .extra-links {
-      display: flex;
-      align-items: center;
-    }
-    nav .extra-links a {
-      margin-left: 10px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 16px;
-      padding: 5px 10px;
-      background: #8d6e63;
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
-    nav .extra-links a:hover {
-      background: #a1887f;
-    }
-    nav .extra-links img {
-      height: 24px;
-      width: 24px;
-      margin-left: 10px;
+    nav .nav-links li a img {
+      height: 20px;
+      width: 20px;
+      vertical-align: middle;
       transition: transform 0.3s ease;
     }
-    nav .extra-links img:hover {
+    nav .nav-links li a img:hover {
       transform: scale(1.1);
+    }
+    nav .nav-links li a:focus {
+      outline: 2px solid #ffd700;
+      outline-offset: 2px;
     }
     
     /* Hamburger Menu Styling for desktop (hidden by default) */
@@ -141,7 +121,7 @@
       transition: transform 0.3s ease;
     }
     nav .hamburger:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
     
     /* Main container – add top padding to allow for the fixed navbar */
@@ -189,6 +169,7 @@
       left: 50%;           /* Horizontally center */
       z-index: 1;
       transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      will-change: transform, opacity;
     }
     #home-section .hero-content h1 {
       font-size: 32px;
@@ -214,7 +195,6 @@
       background: #a1887f;
       transform: scale(1.02);
     }
-    /* Shimmer effect */
     #home-section .hero-content button::after {
       content: "";
       position: absolute;
@@ -333,21 +313,21 @@
         display: block;
         margin: 10px 0;
       }
-      /* Hide nav-links by default; show when active */
+      /* Animate nav-links for mobile */
       nav .nav-links {
-        display: none;
+        display: flex;
         flex-direction: column;
         width: 100%;
         margin-top: 10px;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
       }
       nav .nav-links.active {
-        display: flex;
+        max-height: 500px;
       }
       nav .nav-links li {
         margin: 10px 0;
-      }
-      nav .extra-links {
-        margin-top: 10px;
       }
       #home-section {
         min-height: 100vh;
@@ -368,23 +348,35 @@
       width: 100%;
       height: 100vh;
       background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('farmhouse.jpg') no-repeat center bottom;
-      background-size: contain;
+      background-size: cover;
       transform-origin: center bottom;
       z-index: 0;
       transition: transform 0.3s ease-out;
+      border-radius: 10px;
+      will-change: transform;
     }
 
     @keyframes fadein {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* New rule to make images rounded with a bubbly hover effect */
+    img.rounded {
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    img.rounded:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 <body>
   <nav>
     <div class="logo">
-      <!-- Replace with your actual logo -->
-      <img src="icon.jpg" alt="Farmhouse Mushroom Company Logo">
+      <!-- Added the "rounded" class for rounded edges -->
+      <img src="icon.jpg" alt="Farmhouse Mushroom Company Logo" class="rounded">
       <span>Farmhouse Mushroom Company</span>
     </div>
     <button class="hamburger" onclick="toggleNav()">&#9776;</button>
@@ -394,18 +386,14 @@
       <li><a href="#" onclick="showSection('price'); return false;">Price Sheet</a></li>
       <li><a href="#" onclick="showSection('about'); return false;">About Us</a></li>
       <li><a href="#" onclick="showSection('products'); return false;">Products</a></li>
-    </ul>
-    <div class="extra-links">
-      <!-- Replace with your Etsy store URL -->
-      <a href="https://www.etsy.com/yourshop" target="_blank">Etsy Store</a>
-      <!-- Replace with your social icons -->
-      <a href="https://www.instagram.com/yourprofile" target="_blank">
+      <li><a href="https://www.etsy.com/yourshop" target="_blank" rel="noopener noreferrer">Etsy Store</a></li>
+      <li><a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">
         <img src="instagram.svg" alt="Instagram">
-      </a>
-      <a href="https://www.facebook.com/yourprofile" target="_blank">
+      </a></li>
+      <li><a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener noreferrer">
         <img src="facebook.svg" alt="Facebook">
-      </a>
-    </div>
+      </a></li>
+    </ul>
   </nav>
 
   <main>
@@ -532,8 +520,17 @@
     // Update main padding on window resize
     window.addEventListener("resize", updateMainPadding);
 
-    // Parallax scroll effect for the home section
-    window.addEventListener("scroll", parallaxEffect);
+    // Parallax scroll effect for the home section with requestAnimationFrame optimization
+    var ticking = false;
+    window.addEventListener("scroll", function() {
+      if (!ticking) {
+          requestAnimationFrame(function() {
+              parallaxEffect();
+              ticking = false;
+          });
+          ticking = true;
+      }
+    });
 
     function parallaxEffect() {
       var scrollY = window.pageYOffset;
