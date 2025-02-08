@@ -138,77 +138,6 @@
       animation: fadein 0.5s ease-out;
     }
     
-    /* Home Section – Updated Landing Page with Parallax */
-    #home-section {
-      position: relative; /* For containing absolute positioned .bg-container */
-      background: none; /* Background is now handled by .bg-container */
-      color: #fff;
-      text-align: center;
-      min-height: 500vh; /* Updated height for extended parallax scrolling */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      overflow: hidden; /* Hide any overflow during transforms */
-    }
-    /* Added dark overlay for better text contrast */
-    #home-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
-    #home-section .hero-content {
-      position: absolute;  /* Changed from relative */
-      top: 50%;            /* Vertically center */
-      left: 50%;           /* Horizontally center */
-      z-index: 1;
-      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-      will-change: transform, opacity;
-    }
-    #home-section .hero-content h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-    #home-section .hero-content p {
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
-    #home-section .hero-content button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #8d6e63;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s, transform 0.3s;
-    }
-    #home-section .hero-content button:hover {
-      background: #a1887f;
-      transform: scale(1.02);
-    }
-    #home-section .hero-content button::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-      transition: left 0.5s;
-    }
-    #home-section .hero-content button:hover::after {
-      left: 100%;
-    }
-    
     /* Iframe Sections (Mushrooms & Price Sheet) */
     .iframe-section {
       height: calc(100vh - var(--nav-height));
@@ -329,31 +258,12 @@
       nav .nav-links li {
         margin: 10px 0;
       }
-      #home-section {
-        min-height: 100vh;
-      }
       .team-member-card {
         width: 100px;
       }
       .product-category {
         width: 140px;
       }
-    }
-
-    /* Background container for parallax effect */
-    #home-section .bg-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('farmhouse.jpg') no-repeat center bottom;
-      background-size: cover;
-      transform-origin: center bottom;
-      z-index: 0;
-      transition: transform 0.3s ease-out;
-      border-radius: 10px;
-      will-change: transform;
     }
 
     @keyframes fadein {
@@ -381,7 +291,6 @@
     </div>
     <button class="hamburger" onclick="toggleNav()">&#9776;</button>
     <ul class="nav-links">
-      <li><a href="#" onclick="showSection('home'); return false;">Home</a></li>
       <li><a href="#" onclick="showSection('mushrooms'); return false;">Mushrooms</a></li>
       <li><a href="#" onclick="showSection('price'); return false;">Price Sheet</a></li>
       <li><a href="#" onclick="showSection('about'); return false;">About Us</a></li>
@@ -397,15 +306,6 @@
   </nav>
 
   <main>
-    <!-- Home Section – Updated Landing Page with Parallax -->
-    <section id="home-section" class="active">
-      <div class="bg-container"></div>
-      <div class="hero-content">
-        <h1>Welcome to Farmhouse Mushroom Company</h1>
-        <p>We love mushrooms.</p>
-      </div>
-    </section>
-
     <!-- Mushrooms Section – Iframe Taking Full Available Space -->
     <section id="mushrooms-section" class="iframe-section">
       <!-- Updated iframe src for the mushroom card page -->
@@ -520,52 +420,10 @@
     // Update main padding on window resize
     window.addEventListener("resize", updateMainPadding);
 
-    // Parallax scroll effect for the home section with requestAnimationFrame optimization
-    var ticking = false;
-    window.addEventListener("scroll", function() {
-      if (!ticking) {
-          requestAnimationFrame(function() {
-              parallaxEffect();
-              ticking = false;
-          });
-          ticking = true;
-      }
-    });
-
-    function parallaxEffect() {
-      var scrollY = window.pageYOffset;
-      var maxScrollBG = 4000;   // Extended scroll range for background zoom
-      var maxScrollText = 2000; // Extended scroll range for hero text transformation
-
-      // Background: Start at a smaller scale (0.5) and zoom in up to 4x for a drastic parallax effect.
-      var initialBgScale = 0.5;
-      var finalBgScale = 4;
-      var bgScale = initialBgScale + (Math.min(scrollY, maxScrollBG) / maxScrollBG) * (finalBgScale - initialBgScale);
-      
-      // Calculate vertical translation so the image shifts down as it zooms.
-      // Here, maxTranslateY is set to 20% of the viewport height.
-      var maxTranslateY = window.innerHeight * 0.2;
-      var bgTranslateY = (Math.min(scrollY, maxScrollBG) / maxScrollBG) * maxTranslateY;
-      var bgContainer = document.querySelector('#home-section .bg-container');
-      if (bgContainer) {
-          bgContainer.style.transform = 'translateY(' + bgTranslateY + 'px) scale(' + bgScale + ')';
-      }
-      
-      // Hero content: Start larger (scale 2.0) and scale down gradually to scale 1.0
-      var progress = Math.min(scrollY, maxScrollText) / maxScrollText;
-      var textScale = 2.0 - 1.0 * progress;
-      var heroContent = document.querySelector('#home-section .hero-content');
-      if (heroContent) {
-          heroContent.style.transform = 'translate(-50%, -50%) scale(' + textScale + ')';
-          heroContent.style.opacity = 1;
-      }
-    }
-
-    // Set default section on load (Home)
+    // Set default section on load (Mushrooms)
     document.addEventListener("DOMContentLoaded", function() {
-      showSection('home');
+      showSection('mushrooms');
       updateMainPadding();
-      parallaxEffect();
     });
   </script>
 </body>
