@@ -284,22 +284,38 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    /* Checkerboard background themes for sections */
+    /* Checkerboard background themes for sections using a color and white */
     #mushrooms-section {
-      background: repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #1E90FF 10px, #1E90FF 20px);
+      background-image: 
+        linear-gradient(45deg, #1E90FF 25%, white 25%, white 75%, #1E90FF 75%, #1E90FF),
+        linear-gradient(45deg, #1E90FF 25%, white 25%, white 75%, #1E90FF 75%, #1E90FF);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
     }
     #price-section {
-      background: repeating-linear-gradient(45deg, #32CD32, #32CD32 10px, #FF4500 10px, #FF4500 20px);
+      background-image: 
+        linear-gradient(45deg, #FFD700 25%, white 25%, white 75%, #FFD700 75%, #FFD700),
+        linear-gradient(45deg, #FFD700 25%, white 25%, white 75%, #FFD700 75%, #FFD700);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
     }
     #about-section {
-      background: repeating-linear-gradient(45deg, #F5F5DC, #F5F5DC 10px, #8B4513 10px, #8B4513 20px);
+      background-image: 
+        linear-gradient(45deg, #FF4500 25%, white 25%, white 75%, #FF4500 75%, #FF4500),
+        linear-gradient(45deg, #FF4500 25%, white 25%, white 75%, #FF4500 75%, #FF4500);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
       font-family: 'Old Standard TT', serif;
       color: #3b3b3b;
       padding: 40px 20px;
       text-align: center;
     }
     #products-section {
-      background: repeating-linear-gradient(45deg, #FFDAB9, #FFDAB9 10px, #E9967A 10px, #E9967A 20px);
+      background-image: 
+        linear-gradient(45deg, #32CD32 25%, white 25%, white 75%, #32CD32 75%, #32CD32),
+        linear-gradient(45deg, #32CD32 25%, white 25%, white 75%, #32CD32 75%, #32CD32);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
     }
   </style>
 </head>
@@ -476,15 +492,25 @@
     function updateNavBackground(sectionId) {
       var nav = document.querySelector("nav");
       if(sectionId === 'mushrooms-section') {
-         nav.style.background = "repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #1E90FF 10px, #1E90FF 20px)";
+         nav.style.backgroundImage = "linear-gradient(45deg, #1E90FF 25%, white 25%, white 75%, #1E90FF 75%, #1E90FF)";
+         nav.style.backgroundSize = "40px 40px";
+         nav.style.backgroundPosition = "0 0, 20px 20px";
       } else if(sectionId === 'price-section') {
-         nav.style.background = "repeating-linear-gradient(45deg, #32CD32, #32CD32 10px, #FF4500 10px, #FF4500 20px)";
+         nav.style.backgroundImage = "linear-gradient(45deg, #FFD700 25%, white 25%, white 75%, #FFD700 75%, #FFD700)";
+         nav.style.backgroundSize = "40px 40px";
+         nav.style.backgroundPosition = "0 0, 20px 20px";
       } else if(sectionId === 'about-section') {
-         nav.style.background = "repeating-linear-gradient(45deg, #F5F5DC, #F5F5DC 10px, #8B4513 10px, #8B4513 20px)";
+         nav.style.backgroundImage = "linear-gradient(45deg, #FF4500 25%, white 25%, white 75%, #FF4500 75%, #FF4500)";
+         nav.style.backgroundSize = "40px 40px";
+         nav.style.backgroundPosition = "0 0, 20px 20px";
       } else if(sectionId === 'products-section') {
-         nav.style.background = "repeating-linear-gradient(45deg, #FFDAB9, #FFDAB9 10px, #E9967A 10px, #E9967A 20px)";
+         nav.style.backgroundImage = "linear-gradient(45deg, #32CD32 25%, white 25%, white 75%, #32CD32 75%, #32CD32)";
+         nav.style.backgroundSize = "40px 40px";
+         nav.style.backgroundPosition = "0 0, 20px 20px";
       } else {
-         nav.style.background = "linear-gradient(45deg, #6d4c41, #8d6e63)";
+         nav.style.backgroundImage = "linear-gradient(45deg, #FFA500 25%, white 25%, white 75%, #FFA500 75%, #FFA500)";
+         nav.style.backgroundSize = "40px 40px";
+         nav.style.backgroundPosition = "0 0, 20px 20px";
       }
     }
   </script>
