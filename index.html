@@ -7,6 +7,9 @@
   <meta name="description" content="Farmhouse Mushroom Company: Quality mushrooms cultivated with sustainable, farmhouse-inspired methods.">
   <!-- Added Google Fonts for improved typography -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap" rel="stylesheet">
+  <!-- Added Font Awesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-954/AZNiKaP5P+RGaYBvCSo6EOwXXd7myTkgxq8F1E5t1V7Pbh5V44e4hk5vFH/eyqfsuLe1b8ahPMjapvYTzA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* Enable smooth scrolling globally */
     html {
@@ -280,6 +283,24 @@
       transform: scale(1.05);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
+
+    /* Checkerboard background themes for sections */
+    #mushrooms-section {
+      background: repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #1E90FF 10px, #1E90FF 20px);
+    }
+    #price-section {
+      background: repeating-linear-gradient(45deg, #32CD32, #32CD32 10px, #FF4500 10px, #FF4500 20px);
+    }
+    #about-section {
+      background: repeating-linear-gradient(45deg, #F5F5DC, #F5F5DC 10px, #8B4513 10px, #8B4513 20px);
+      font-family: 'Old Standard TT', serif;
+      color: #3b3b3b;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    #products-section {
+      background: repeating-linear-gradient(45deg, #FFDAB9, #FFDAB9 10px, #E9967A 10px, #E9967A 20px);
+    }
   </style>
 </head>
 <body>
@@ -297,10 +318,10 @@
       <li><a href="#" onclick="showSection('products'); return false;">Products</a></li>
       <li><a href="https://www.etsy.com/yourshop" target="_blank" rel="noopener noreferrer">Etsy Store</a></li>
       <li><a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">
-        <img src="instagram.svg" alt="Instagram">
+        <i class="fab fa-instagram"></i>
       </a></li>
       <li><a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener noreferrer">
-        <img src="facebook.svg" alt="Facebook">
+        <i class="fab fa-facebook"></i>
       </a></li>
     </ul>
   </nav>
@@ -320,10 +341,11 @@
 
     <!-- About Us Section -->
     <section id="about-section">
-      <h2>About Us</h2>
-      <p>Located in Bokchito, Oklahoma, we love studying and growing culinary mushrooms.</p>
-      <p>Our commitment to quality, community, and sustainability shines through every harvest. We invite you to explore our story and meet the team that makes it all possible.</p>
-      <h3>Our Team</h3>
+      <h2>About Our Farmhouse & Redneck Engineering</h2>
+      <img src="farmhouse.jpg" alt="Farmhouse" class="about-farmhouse-img">
+      <p>Welcome to our rustic haven nestled in the heart of Bokchito, Oklahoma – the redneck engineering capital of the world! At Farmhouse Mushroom Company, we blend time-honored traditions with a down-home dose of ingenuity as we lovingly cultivate our mushrooms.</p>
+      <p>Experience the charm of a bygone era where community, quality, and the simple pace of country living guide every harvest. Here, old‐time values meet redneck engineering, making every harvest a true work of art.</p>
+      <h3>Our Down-Home Team</h3>
       <div class="team-members">
         <div class="team-member-card">
           <img src="https://via.placeholder.com/150" alt="Josh">
@@ -359,7 +381,7 @@
         </div>
       </div>
       <h3>Contact Us</h3>
-      <p>For inquiries or special requests, email us at <a href="mailto:farmhousemushroom@gmail.com">farmhousemushroom@gmail.com</a>.</p>
+      <p>For inquiries or special requests, drop an old-fashioned note at <a href="mailto:farmhousemushroom@gmail.com">farmhousemushroom@gmail.com</a>.</p>
     </section>
 
     <!-- Products Section -->
@@ -379,6 +401,30 @@
         <div class="product-category">
           <a href="https://www.etsy.com/yourshop/agar-cultures" target="_blank">Agar Cultures</a>
         </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/grow-blocks" target="_blank">Grow Blocks</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/mushroom-complex-supplement-powder" target="_blank">Mushroom Complex Supplement Powder</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/extracts-and-concentrates" target="_blank">Extracts &amp; Concentrates</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/vital-elixir-bone-broth-mushroom-soup-powder" target="_blank">Vital Elixir Bone Broth Mushroom Soup Powder</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/mushroom-compost" target="_blank">Mushroom Compost</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/inoculated-logs" target="_blank">Inoculated Logs</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/mushroom-growing-guide-ebook" target="_blank">Mushroom Growing Guide eBook</a>
+        </div>
+        <div class="product-category">
+          <a href="https://www.etsy.com/yourshop/farmhouse-mushroom-company-merchandise" target="_blank">Farmhouse Mushroom Company Merchandise</a>
+        </div>
       </div>
     </section>
   </main>
@@ -394,6 +440,7 @@
       var target = document.getElementById(section + "-section");
       if(target) {
           target.classList.add("active");
+          updateNavBackground(target.id);
       }
       // Scroll to top after section change
       window.scrollTo(0, 0);
@@ -425,6 +472,21 @@
       showSection('mushrooms');
       updateMainPadding();
     });
+
+    function updateNavBackground(sectionId) {
+      var nav = document.querySelector("nav");
+      if(sectionId === 'mushrooms-section') {
+         nav.style.background = "repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #1E90FF 10px, #1E90FF 20px)";
+      } else if(sectionId === 'price-section') {
+         nav.style.background = "repeating-linear-gradient(45deg, #32CD32, #32CD32 10px, #FF4500 10px, #FF4500 20px)";
+      } else if(sectionId === 'about-section') {
+         nav.style.background = "repeating-linear-gradient(45deg, #F5F5DC, #F5F5DC 10px, #8B4513 10px, #8B4513 20px)";
+      } else if(sectionId === 'products-section') {
+         nav.style.background = "repeating-linear-gradient(45deg, #FFDAB9, #FFDAB9 10px, #E9967A 10px, #E9967A 20px)";
+      } else {
+         nav.style.background = "linear-gradient(45deg, #6d4c41, #8d6e63)";
+      }
+    }
   </script>
 </body>
 </html> 
