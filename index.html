@@ -284,38 +284,26 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    /* Checkerboard background themes for sections using a color and white */
-    #mushrooms-section {
-      background-image: 
-        linear-gradient(45deg, #1E90FF 25%, white 25%, white 75%, #1E90FF 75%, #1E90FF),
-        linear-gradient(45deg, #1E90FF 25%, white 25%, white 75%, #1E90FF 75%, #1E90FF);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-    }
-    #price-section {
-      background-image: 
-        linear-gradient(45deg, #FFD700 25%, white 25%, white 75%, #FFD700 75%, #FFD700),
-        linear-gradient(45deg, #FFD700 25%, white 25%, white 75%, #FFD700 75%, #FFD700);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-    }
-    #about-section {
-      background-image: 
-        linear-gradient(45deg, #FF4500 25%, white 25%, white 75%, #FF4500 75%, #FF4500),
-        linear-gradient(45deg, #FF4500 25%, white 25%, white 75%, #FF4500 75%, #FF4500);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
-      font-family: 'Old Standard TT', serif;
-      color: #3b3b3b;
+    /* Unified dark background for main sections */
+    #mushrooms-section, #price-section, #about-section, #products-section {
+      background: #222;
+      color: #f0f0f0;
       padding: 40px 20px;
+    }
+    /* Preserve About Us typography */
+    #about-section {
+      font-family: 'Old Standard TT', serif;
       text-align: center;
     }
-    #products-section {
-      background-image: 
-        linear-gradient(45deg, #32CD32 25%, white 25%, white 75%, #32CD32 75%, #32CD32),
-        linear-gradient(45deg, #32CD32 25%, white 25%, white 75%, #32CD32 75%, #32CD32);
-      background-size: 40px 40px;
-      background-position: 0 0, 20px 20px;
+
+    /* Styles for the farmhouse image in the About Us section */
+    #about-section .about-farmhouse-img {
+      display: block;
+      margin: 20px auto;
+      max-width: 200px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
@@ -491,27 +479,7 @@
 
     function updateNavBackground(sectionId) {
       var nav = document.querySelector("nav");
-      if(sectionId === 'mushrooms-section') {
-         nav.style.backgroundImage = "linear-gradient(45deg, #1E90FF 25%, white 25%, white 75%, #1E90FF 75%, #1E90FF)";
-         nav.style.backgroundSize = "40px 40px";
-         nav.style.backgroundPosition = "0 0, 20px 20px";
-      } else if(sectionId === 'price-section') {
-         nav.style.backgroundImage = "linear-gradient(45deg, #FFD700 25%, white 25%, white 75%, #FFD700 75%, #FFD700)";
-         nav.style.backgroundSize = "40px 40px";
-         nav.style.backgroundPosition = "0 0, 20px 20px";
-      } else if(sectionId === 'about-section') {
-         nav.style.backgroundImage = "linear-gradient(45deg, #FF4500 25%, white 25%, white 75%, #FF4500 75%, #FF4500)";
-         nav.style.backgroundSize = "40px 40px";
-         nav.style.backgroundPosition = "0 0, 20px 20px";
-      } else if(sectionId === 'products-section') {
-         nav.style.backgroundImage = "linear-gradient(45deg, #32CD32 25%, white 25%, white 75%, #32CD32 75%, #32CD32)";
-         nav.style.backgroundSize = "40px 40px";
-         nav.style.backgroundPosition = "0 0, 20px 20px";
-      } else {
-         nav.style.backgroundImage = "linear-gradient(45deg, #FFA500 25%, white 25%, white 75%, #FFA500 75%, #FFA500)";
-         nav.style.backgroundSize = "40px 40px";
-         nav.style.backgroundPosition = "0 0, 20px 20px";
-      }
+      nav.style.background = "linear-gradient(45deg, #333, #222)";
     }
   </script>
 </body>
